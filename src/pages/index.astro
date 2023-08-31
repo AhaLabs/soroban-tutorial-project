@@ -1,6 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import ConnectFreighter from '../components/ConnectFreighter.astro';
+import Counter from '../components/Counter.astro';
+import { Contract, networks } from 'hello-soroban-client';
+
+const greeter = new Contract({
+  ...networks.futurenet,
+  rpcUrl: 'https://rpc-futurenet.stellar.org', // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
+});
+
+const greeting = await greeter.hello({ to: 'Soroban' });
 ---
 
 <Layout title="Welcome to Astro.">
@@ -33,10 +43,10 @@ import Card from '../components/Card.astro';
 				</linearGradient>
 			</defs>
 		</svg>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
+		<h1><span class="text-gradient">{greeting.join(' ')}</span></h1>
+    <ConnectFreighter />
 		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+      <Counter />
 		</p>
 		<ul role="list" class="link-card-grid">
 			<Card

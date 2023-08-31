@@ -1,0 +1,2 @@
+[alias] # command aliases
+install_soroban = "install --git https://github.com/AhaLabs/soroban-tools --branch smartdeploy --root ./target soroban-cli --debug"
