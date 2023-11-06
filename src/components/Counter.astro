@@ -7,8 +7,8 @@ Current value: <strong id="current-value" aria-live="polite">???</strong><br />
   import { Contract, networks } from "incrementor-client";
 
   const incrementor = new Contract({
-    ...networks.futurenet,
-    rpcUrl: 'https://rpc-futurenet.stellar.org',
+    ...networks.testnet,
+    rpcUrl: "https://soroban-testnet.stellar.org", // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
   });
 
   const button = document.querySelector("[data-increment]");
