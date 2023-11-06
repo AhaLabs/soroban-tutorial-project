@@ -6,11 +6,11 @@ import Counter from '../components/Counter.astro';
 import { Contract, networks } from 'hello-soroban-client';
 
 const greeter = new Contract({
-  ...networks.futurenet,
-  rpcUrl: 'https://rpc-futurenet.stellar.org', // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
+  ...networks.testnet,
+  rpcUrl: "https://soroban-testnet.stellar.org", // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
 });
 
-const greeting = await greeter.hello({ to: 'Soroban' });
+const greeting = await greeter.hello({ to: "Soroban" });
 ---
 
 <Layout title="Welcome to Astro.">
