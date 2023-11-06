@@ -1,5 +1,0 @@
-#!/bin/bash
-if [ ! -f ./target/bin/soroban ]; then
-  cargo install_soroban
-fi
-./target/bin/soroban "$@" # `$@` expands to all arguments passed to this script
