@@ -1,6 +1,12 @@
 <div id="freighter-wrap" class="wrap" aria-live="polite">
-  <div class="ellipsis">
-    <button data-connect aria-controls="freighter-wrap">Connect</button>
+  <small class="ifSignedIn ellipsis" data-freighter-ellipsis></small>
+  <div class="ifSignedOut">
+    <small style="display: none" data-freighter-error></small>
+    <button
+      style="display: none"
+      data-freighter-connect
+      aria-controls="freighter-wrap">Connect</button
+    >
   </div>
 </div>
 
@@ -21,31 +27,34 @@
 </style>
 
 <script>
-  import { isAllowed, setAllowed, getUserInfo } from '@stellar/freighter-api';
+  import * as wallet from "../wallet";
 
-  const wrap = document.querySelector('#freighter-wrap');
-  const ellipsis = document.querySelector('#freighter-wrap .ellipsis');
-  const button = document.querySelector('[data-connect]');
+  const wrap = document.querySelector("#freighter-wrap");
+  const button = document.querySelector("[data-freighter-connect]");
+  const ellipsis = document.querySelector("[data-freighter-ellipsis]");
+  const errorMsg = document.querySelector("[data-freighter-error]");
 
-  async function getPk() {
-    const { publicKey } = await getUserInfo();
-    return publicKey;
-  }
+  button?.addEventListener("click", async () => {
+    button.disabled = true;
+    await wallet.enable();
+    button.disabled = false;
+  });
 
-  async function setLoggedIn() {
-    const publicKey = await getPk();
-    ellipsis.innerHTML = `Signed in as ${publicKey}`;
-    ellipsis.title = publicKey;
-  }
-
-  if (await isAllowed()) {
-    if (await getPk()) setLoggedIn();
-    else wrap.innerHTML = 'Freighter is locked.<br>Sign in & refresh the page.';
-  } else {
-    button.addEventListener('click', async () => {
-      button.disabled = true;
-      await setAllowed();
-      await setLoggedIn();
-    });
-  }
+  wallet.onChange(async ({ account }) => {
+    if (wallet.isSignedIn()) {
+      ellipsis.innerHTML = `Signed in as ${account}`;
+      ellipsis.title = account;
+    } else if (wallet.isSignedInToWrongNetwork()) {
+      errorMsg.innerHTML = "Please switch to Testnet";
+      errorMsg.style.display = "block";
+      button.style.display = "none";
+    } else if (wallet.freighterIsLocked()) {
+      errorMsg.innerHTML = "Please unlock Freighter";
+      errorMsg.style.display = "block";
+      button.style.display = "none";
+    } else {
+      errorMsg.style.display = "none";
+      button.style.display = "block";
+    }
+  });
 </script>
