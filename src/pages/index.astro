@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import ConnectFreighter from '../components/ConnectFreighter.astro';
-import Counter from '../components/Counter.astro';
 import { Contract, networks } from 'hello-soroban-client';
 
 const greeter = new Contract({
@@ -46,7 +45,8 @@ const greeting = await greeter.hello({ to: "Soroban" });
 		<h1><span class="text-gradient">{greeting.join(' ')}</span></h1>
     <ConnectFreighter />
 		<p class="instructions">
-      <Counter />
+			To get started, open the directory <code>src/pages</code> in your project.<br />
+			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
 			<Card
