@@ -6,9 +6,22 @@ let enabled: boolean
 let network: string
 let networkUrl: string
 let networkPassphrase: string
+let expectedNetwork = "TESTNET" //defaulting to TESTNET, but allowing this value to be changed with setExpectedNetwork
+
+export function setExpectedNetwork(network: string) {
+  expectedNetwork = network
+}
 
 export function isSignedIn() {
-  return enabled && !!account && network === 'FUTURENET'
+  return enabled && !!account && network === expectedNetwork
+}
+
+export function isSignedInToWrongNetwork() {
+  return enabled && !!account && network !== expectedNetwork
+}
+
+export function freighterIsLocked() {
+  return enabled && !account
 }
 
 export function getState() {
