@@ -29,9 +29,9 @@
 <script>
   import * as wallet from "../wallet";
 
-  const button = document.querySelector("[data-freighter-connect]");
-  const ellipsis = document.querySelector("[data-freighter-ellipsis]");
-  const errorMsg = document.querySelector("[data-freighter-error]");
+  const button = document.querySelector("[data-freighter-connect]") as HTMLInputElement;
+  const ellipsis = document.querySelector("[data-freighter-ellipsis]") as HTMLElement;
+  const errorMsg = document.querySelector("[data-freighter-error]") as HTMLElement;
 
   button?.addEventListener("click", async () => {
     button.disabled = true;
