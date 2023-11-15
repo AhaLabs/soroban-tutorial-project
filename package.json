@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "create_deployer": "soroban config identity generate alice && soroban config identity fund alice --network testnet",
@@ -20,7 +20,9 @@
     "postinstall": "if [ ! -d .soroban ]; then npm run setup; fi && npm run bindings:hello && npm run bindings:incrementor"
   },
   "dependencies": {
+    "@astrojs/check": "^0.3.1",
     "@stellar/freighter-api": "^1.6.0",
-    "astro": "^3.0.3"
+    "astro": "^3.0.3",
+    "typescript": "^5.2.2"
   }
 }
