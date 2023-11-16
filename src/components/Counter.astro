@@ -11,8 +11,8 @@ Current value: <strong id="current-value" aria-live="polite">???</strong><br />
     rpcUrl: "https://soroban-testnet.stellar.org", // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
   });
 
-  const button = document.querySelector("[data-increment]");
-  const currentValue = document.querySelector("#current-value");
+  const button = document.querySelector("[data-increment]") as HTMLInputElement;
+  const currentValue = document.querySelector("#current-value") as HTMLElement;
 
   button.addEventListener("click", async () => {
     button.disabled = true;

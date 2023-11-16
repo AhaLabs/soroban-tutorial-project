@@ -33,7 +33,7 @@
   const ellipsis = document.querySelector("[data-freighter-ellipsis]") as HTMLElement;
   const errorMsg = document.querySelector("[data-freighter-error]") as HTMLElement;
 
-  button?.addEventListener("click", async () => {
+  button.addEventListener("click", async () => {
     button.disabled = true;
     await wallet.enable();
     button.disabled = false;
