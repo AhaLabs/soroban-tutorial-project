@@ -8,7 +8,7 @@ const greeter = new Contract({
   rpcUrl: "https://soroban-testnet.stellar.org", // from https://soroban.stellar.org/docs/reference/rpc#public-rpc-providers
 });
 
-const greeting = await greeter.hello({ to: "Soroban" });
+const greetingTx = await greeter.hello({ to: "Soroban" });
 ---
 
 <Layout title="Welcome to Astro.">
@@ -41,7 +41,7 @@ const greeting = await greeter.hello({ to: "Soroban" });
 				</linearGradient>
 			</defs>
 		</svg>
-		<h1><span class="text-gradient">{greeting.join(' ')}</span></h1>
+		<h1><span class="text-gradient">{greetingTx.result.join(' ')}</span></h1>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
