@@ -21,7 +21,8 @@ Current value: <strong id="current-value" aria-live="polite">???</strong><br />
       currentValue.innerHTML +
       '<span class="visually-hidden"> – updating…</span>';
 
-    const newValue = await incrementor.increment();
+    const incrementTx = await incrementor.increment()
+    const newValue = await incrementTx.signAndSend()
 
     // Only use `innerHTML` with contract values you trust!
     // Blindly using values from an untrusted contract opens your users to script injection attacks!
